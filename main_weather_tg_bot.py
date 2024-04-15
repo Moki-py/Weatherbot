@@ -1,9 +1,12 @@
 """This is a weather bot for Telegram. """
 import datetime
+
 import requests
+
 from aiogram import Bot, types
 from aiogram.dispatcher import Dispatcher
 from aiogram.utils import executor
+
 from config import TG_BOT_TOKEN as tg_bot_token
 from config import OPEN_WEATHER_TOKEN as open_weather_token
 
@@ -23,6 +26,8 @@ async def start_command(message: types.Message):
 @dp.message_handler()
 async def get_weather(message: types.Message):
     """Get the weather for the city."""
+
+    print(message.chat.id, message.text)
 
     code_to_smile = {
         "Clear":  "Ясно \U00002600",
@@ -85,5 +90,11 @@ async def get_weather(message: types.Message):
             )
 
 
+async def send_message():
+    """Send a message to the user."""
+    await bot.send_message(191069445, 'Ебашу отсюда')
+    await bot.send_message(87701872, ':]')
+
 if __name__ == "__main__":
+    executor.start(dp, send_message())
     executor.start_polling(dp)
