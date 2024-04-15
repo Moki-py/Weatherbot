@@ -9,6 +9,7 @@ from aiogram.utils import executor
 
 from config import TG_BOT_TOKEN as tg_bot_token
 from config import OPEN_WEATHER_TOKEN as open_weather_token
+from config import CHAT_ID1, CHAT_ID2
 
 
 bot = Bot(token=tg_bot_token)
@@ -92,8 +93,8 @@ async def get_weather(message: types.Message):
 
 async def send_message():
     """Send a message to the user."""
-    await bot.send_message(191069445, 'Ебашу отсюда')
-    await bot.send_message(87701872, ':]')
+    await bot.send_message(CHAT_ID1, '<3')
+    await bot.send_message(CHAT_ID2, ':]')
 
 if __name__ == "__main__":
     executor.start(dp, send_message())
