@@ -16,7 +16,7 @@ dp = Dispatcher(bot)
 async def start_command(message: types.Message):
     """Send a message when the command /start is issued. """
     await message.reply(
-        "Привет! Напиши мне название города на ангельском и я пришлю тебе погоду!"
+        "Напиши мне название города на ангельском и я пришлю тебе погоду!"
         )
 
 
@@ -53,10 +53,8 @@ async def get_weather(message: types.Message):
         city_n = data["name"]
         icon = data["weather"][0]["main"]
 
-        if icon in code_to_smile:
-            weather_disc = code_to_smile[icon]
-        else:
-            weather_disc = "Глянь в окно"
+        weather_disc = code_to_smile.get(icon, "Посмотри в окно")
+
         temp = data["main"]["temp"]
         temp_feels_like = data["main"]["feels_like"]
         temp_max = data["main"]["temp_max"]
@@ -68,7 +66,8 @@ async def get_weather(message: types.Message):
 
         wind_speed = data["wind"]["speed"]
 
-        await message.reply(f"Дата {datetime.datetime.now().strftime('%Y-%m-%d %H:%M')}:\n"
+        await message.reply(
+              f"Дата {datetime.datetime.now().strftime('%Y-%m-%d %H:%M')}:\n"
               f"Город: {city_n}\n\n"
               f"{weather_disc}\n"
               f"Температура: {temp}°C\n"
@@ -80,8 +79,10 @@ async def get_weather(message: types.Message):
               f"Закат: {sunset}\n\n"
               f"Скорость ветра: {wind_speed} м/с")
 
-    except Exception as e:
-        await message.reply("\U00002620 Проверь название города и поши по английски \U00002620")
+    except KeyError:
+        await message.reply(
+            "\U00002620 Проверь название города и поши по английски \U00002620"
+            )
 
 
 if __name__ == "__main__":
