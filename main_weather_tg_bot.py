@@ -20,7 +20,7 @@ dp = Dispatcher(bot)
 async def start_command(message: types.Message):
     """Send a message when the command /start is issued. """
     await message.reply(
-        "Напиши мне название города на ангельском и я пришлю тебе погоду!"
+        "Напиши мне название города на английском и я пришлю тебе погоду!"
         )
 
 
@@ -87,7 +87,7 @@ async def get_weather(message: types.Message):
 
     except KeyError:
         await message.reply(
-            "\U00002620 Проверь название города и поши по английски \U00002620"
+            "\U00002620 Проверь название города и пиши по английски \U00002620"
             )
 
 
